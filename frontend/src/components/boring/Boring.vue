@@ -3,17 +3,10 @@
 
 
         <div class="row">
-            <pre style="background-color: black">
-
-
-
-
-
-
-
-
-                
-            </pre>
+            <video controls>
+                <source src="./TextInMotion-Sample-720p.mp4" type="video/mp4">
+                Your browser sucks
+            </video>
         </div>
 
 
