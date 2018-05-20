@@ -3,10 +3,7 @@
 
 
         <div class="row">
-            <video controls>
-                <source src="./TextInMotion-Sample-720p.mp4" type="video/mp4">
-                Your browser sucks
-            </video>
+                <img src="http://www.imissodie.com:8080/stream/video.mjpeg" >
         </div>
 
 
