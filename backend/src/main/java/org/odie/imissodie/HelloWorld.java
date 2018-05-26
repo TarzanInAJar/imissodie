@@ -19,34 +19,20 @@ import java.util.Arrays;
 import static java.util.Arrays.stream;
 
 @Controller
-@RequestMapping("/hello")
+@RequestMapping("/")
 public class HelloWorld {
-
-    @Value("${soundfile}")
-    File soundfile;
-
-    @Value("${desiredMixer}")
-    String desiredMixer;
 
     private Clip soundClip;
 
-
     @PostConstruct
-    public void init() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        if (soundfile != null && soundfile.exists()){
-            soundClip = getClip(getSpeaker(desiredMixer), soundfile);
+    public void init(@Value("${soundfile}") File soundFile, @Value("${desiredMixer}") String desiredMixer) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        if (soundFile != null && soundFile.exists()){
+            soundClip = getClip(getSpeaker(desiredMixer), soundFile);
         }
     }
 
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
-
-    @GetMapping
-    public ResponseEntity<String> sayHello(){
-        return new ResponseEntity<>("Hello!", HttpStatus.OK);
-    }
-
-    @GetMapping("/horn")
-    public ResponseEntity<Void> playHorn() {
+    @GetMapping("/call")
+    public ResponseEntity<Void> call() {
         playSound(soundClip);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -60,11 +46,11 @@ public class HelloWorld {
     }
 
     private Clip getClip(Mixer.Info speaker, File soundfile) throws IOException, LineUnavailableException, UnsupportedAudioFileException {
-        AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundfile);
-        Clip clip = AudioSystem.getClip(speaker);
-        clip.open(inputStream);
-        inputStream.close();
-        return clip;
+        try(AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundfile)){
+            Clip clip = AudioSystem.getClip(speaker);
+            clip.open(inputStream);
+            return clip;
+        }
     }
 
     private Mixer.Info getSpeaker(String deviceName){
