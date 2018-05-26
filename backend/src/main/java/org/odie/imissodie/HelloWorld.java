@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.PostConstruct;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
@@ -27,6 +28,16 @@ public class HelloWorld {
     @Value("${desiredMixer}")
     String desiredMixer;
 
+    private Clip soundClip;
+
+
+    @PostConstruct
+    public void init() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        if (soundfile != null && soundfile.exists()){
+            soundClip = getClip(getSpeaker(desiredMixer), soundfile);
+        }
+    }
+
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping
@@ -36,22 +47,24 @@ public class HelloWorld {
 
     @GetMapping("/horn")
     public ResponseEntity<Void> playHorn() {
-        try {
-            playSound();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            log.error("Exception occurred playing soundfile: " + e.getMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        playSound(soundClip);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    private void playSound() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
-        Mixer.Info speaker = getSpeaker(this.desiredMixer);
+    private void playSound(Clip clip) {
+        if (clip.isRunning()){
+            clip.stop();
+            clip.setFramePosition(0);
+        }
+        clip.start();
+    }
+
+    private Clip getClip(Mixer.Info speaker, File soundfile) throws IOException, LineUnavailableException, UnsupportedAudioFileException {
         AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundfile);
         Clip clip = AudioSystem.getClip(speaker);
         clip.open(inputStream);
-        clip.start();
         inputStream.close();
+        return clip;
     }
 
     private Mixer.Info getSpeaker(String deviceName){
