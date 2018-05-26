@@ -20,7 +20,7 @@ import static java.util.Arrays.stream;
 
 @Controller
 @RequestMapping("/")
-public class HelloWorld {
+public class OdieController {
 
     private Clip soundClip;
 
