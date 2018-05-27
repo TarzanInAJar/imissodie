@@ -1,4 +1,4 @@
-package org.odie.imissodie;
+package org.odie.imissodie.controllers;
 
 import ilarkesto.media.Audio;
 import org.slf4j.Logger;
@@ -15,17 +15,11 @@ import javax.annotation.PostConstruct;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 import java.util.concurrent.CountDownLatch;
-import java.util.stream.Collectors;
 
-import static com.google.common.base.Predicates.notNull;
 import static com.google.common.collect.MoreCollectors.onlyElement;
 import static java.util.Arrays.stream;
-import static java.util.Collections.singletonList;
 
 @Controller
 @RequestMapping("/")
