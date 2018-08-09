@@ -3,7 +3,7 @@
     raised
     style="min-height: 300px;"
   >
-    <v-card-media @click="simulateConnection" class="ma-2" style="min-height: 300px;">
+    <v-card-media @click="simulateConnection" class="ma-2">
       <v-layout>
         <v-spacer></v-spacer>
         <v-flex xs10>
@@ -85,6 +85,11 @@
   }
 </script>
 
-<style scoped>
+<style>
+  <!--TODO - update vue/vuetify take advantage of vue selectors-->
+  v-card-media: {
+    min-height: 300px;
+  }
+
 
 </style>
