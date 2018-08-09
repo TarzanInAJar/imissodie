@@ -1,15 +1,30 @@
 <template>
   <v-app :dark="dark">
+
     <v-toolbar>
-      <v-toolbar-side-icon @click="menu = !menu"><v-icon>menu</v-icon></v-toolbar-side-icon>
+      <!-- menu button -->
+      <v-toolbar-side-icon @click="menu = !menu">
+        <v-icon>menu</v-icon>
+      </v-toolbar-side-icon>
+
+      <!-- title -->
       <v-toolbar-title>imissodie</v-toolbar-title>
+
       <v-spacer></v-spacer>
-      <v-switch  v-model="dark"></v-switch>
+
+      <!-- toggle the 'lights' -->
+      <v-btn icon :color="dark ? 'yellow' : 'black'" flat @click="dark=!dark">
+        <v-icon>fa-lightbulb-o</v-icon>
+      </v-btn>
     </v-toolbar>
-      <!--TODO put in a nav bar-->
-      <router-view/>
-      <!--TODO make snackbar available everywhere-->
-      <v-snackbar v-model="snackbar">{{snackbarText}}</v-snackbar>
+
+    <!--TODO put in a nav bar-->
+
+    <!-- main view -->
+    <router-view/>
+
+    <!--TODO make snackbar available everywhere-->
+    <v-snackbar v-model="snackbar">{{snackbarText}}</v-snackbar>
   </v-app>
 </template>
 
