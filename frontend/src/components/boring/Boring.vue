@@ -1,7 +1,5 @@
 <template>
     <div>
-
-
         <div class="row">
                 <img src="http://www.imissodie.com:8080/stream/video.mjpeg" >
         </div>
