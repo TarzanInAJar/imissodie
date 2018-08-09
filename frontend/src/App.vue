@@ -1,6 +1,5 @@
 <template>
   <v-app :dark="dark">
-
     <v-toolbar>
       <!-- menu button -->
       <v-toolbar-side-icon @click="menu = !menu">
@@ -31,29 +30,29 @@
 <script>
   export default {
     name: 'App',
-    data: function() {
-        return {
-            menu: false,
-            dark: true,
-            snackbar: false,
-            snackbarText: ''
-        }
+    data: function () {
+      return {
+        menu: false,
+        dark: true,
+        snackbar: false,
+        snackbarText: ''
+      }
     },
     watch: {
-        menu: function() {
-          this.snackbar = true;
-          this.snackbarText= "menu changed to: " + this.menu;
-        }
+      menu: function () {
+        this.snackbar = true;
+        this.snackbarText = "menu changed to: " + this.menu;
+      }
     }
   }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+  }
 </style>
