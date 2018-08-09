@@ -1,10 +1,10 @@
 <template>
-  <v-app dark>
+  <v-app :dark="dark">
     <v-toolbar>
       <v-toolbar-side-icon @click="menu = !menu"><v-icon>menu</v-icon></v-toolbar-side-icon>
       <v-toolbar-title>imissodie</v-toolbar-title>
       <v-spacer></v-spacer>
-      <span>menutoggle: {{menu}}</span>
+      <v-switch  v-model="dark"></v-switch>
     </v-toolbar>
       <!--TODO put in a nav bar-->
       <router-view/>
@@ -19,6 +19,7 @@
     data: function() {
         return {
             menu: false,
+            dark: true,
             snackbar: false,
             snackbarText: ''
         }
