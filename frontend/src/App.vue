@@ -8,6 +8,8 @@
     </v-toolbar>
       <!--TODO put in a nav bar-->
       <router-view/>
+      <!--TODO make snackbar available everywhere-->
+      <v-snackbar v-model="snackbar">{{snackbarText}}</v-snackbar>
   </v-app>
 </template>
 
@@ -16,7 +18,15 @@
     name: 'App',
     data: function() {
         return {
-            menu: false
+            menu: false,
+            snackbar: false,
+            snackbarText: ''
+        }
+    },
+    watch: {
+        menu: function() {
+          this.snackbar = true;
+          this.snackbarText= "menu changed to: " + this.menu;
         }
     }
   }
