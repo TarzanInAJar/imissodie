@@ -1,9 +1,9 @@
 <template>
-  <v-card class="ma-2"
+  <v-card class="ma-4"
     raised
     style="min-height: 300px;"
   >
-    <v-card-media>
+    <v-card-media @click="video = !video" class="ma-2" style="min-height: 300px;">
       <v-layout>
         <v-spacer></v-spacer>
         <v-flex xs10>
@@ -16,12 +16,13 @@
     <v-card-actions>
       <v-layout>
         <v-spacer></v-spacer>
-          <v-btn color="primary">
+          <v-btn :disabled="!connected" color="primary">
             <v-icon>fa-coffee</v-icon>
           </v-btn>
-          <v-btn color="primary">
+          <v-btn :disabled="!connected" color="primary">
             <v-icon>fa-bullhorn</v-icon>
           </v-btn>
+
         <v-spacer></v-spacer>
 
       <!--
@@ -44,7 +45,13 @@
 
 <script>
   export default {
-    name: "Boring"
+    name: "Boring",
+    data: function() {
+      return {
+        video: false,
+        connected: false
+      }
+    }
   }
 </script>
 
