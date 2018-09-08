@@ -1,0 +1,3 @@
+// only adding this as there appears to be a bug with vuetify...
+
+module.exports={}
